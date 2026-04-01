@@ -1,0 +1,25 @@
+server:
+  port: 8170
+
+spring:
+  application:
+    name: mototrip-weather-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:localhost:8848}
+      config:
+        enabled: false
+        import-check:
+          enabled: false
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

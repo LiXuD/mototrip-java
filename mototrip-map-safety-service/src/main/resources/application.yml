@@ -1,0 +1,48 @@
+server:
+  port: 8150
+
+spring:
+  application:
+    name: mototrip-map-safety-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/mototrip?currentSchema=public
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:123456}
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:localhost:8848}
+      config:
+        enabled: false
+        import-check:
+          enabled: false
+
+rocketmq:
+  name-server: ${ROCKETMQ_ADDR:localhost:9876}
+  producer:
+    group: mototrip-producer-group
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

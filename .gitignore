@@ -1,0 +1,42 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.tar.gz
+### gradle ###
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+# IDE
+.idea/
+*.iml
+*.ipr
+*.lock
+.vscode/
+.settings/
+.project
+.classpath
+.trae/
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Env
+.env
+.env.local
+*.env
+
+# Build
+*.class
+*.jar
+*.war
+
+# Package
+*.zip
+*.tar.gz

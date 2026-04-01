@@ -1,0 +1,190 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mototrip-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:localhost:8848}
+        enabled: true
+        register-enabled: true
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+      config:
+        enabled: false
+        import-check:
+          enabled: false
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+          routes:
+            - id: auth-service
+              uri: lb://mototrip-auth-server
+              predicates:
+                - Path=/api/auth/**
+              filters:
+                - StripPrefix=0
+
+            - id: user-center
+              uri: lb://mototrip-user-center
+              predicates:
+                - Path=/api/users/**,/api/user-mode/**
+              filters:
+                - StripPrefix=0
+
+            - id: route-service
+              uri: lb://mototrip-route-service
+              predicates:
+                - Path=/api/routes/**,/api/waypoints/**,/api/reviews/**
+              filters:
+                - StripPrefix=0
+
+            - id: trip-service
+              uri: lb://mototrip-trip-service
+              predicates:
+                - Path=/api/trips/**,/api/diaries/**,/api/preparations/**,/api/shares/**
+              filters:
+                - StripPrefix=0
+
+            - id: social-service
+              uri: lb://mototrip-social-service
+              predicates:
+                - Path=/api/posts/**,/api/footprints/**
+              filters:
+                - StripPrefix=0
+
+            - id: map-safety-service
+              uri: lb://mototrip-map-safety-service
+              predicates:
+                - Path=/api/maps/**,/api/danger-zones/**,/api/no-parking-zones/**,/api/warnings/**,/api/locations/**
+              filters:
+                - StripPrefix=0
+
+            - id: team-service
+              uri: lb://mototrip-team-service
+              predicates:
+                - Path=/api/teams/**
+              filters:
+                - StripPrefix=0
+
+            - id: weather-service
+              uri: lb://mototrip-weather-service
+              predicates:
+                - Path=/api/weather/**
+              filters:
+                - StripPrefix=0
+
+            - id: auth-doc
+              uri: lb://mototrip-auth-server
+              predicates:
+                - Path=/v3/api-docs/auth-service/**
+              filters:
+                - StripPrefix=0
+
+            - id: user-center-doc
+              uri: lb://mototrip-user-center
+              predicates:
+                - Path=/v3/api-docs/user-center/**
+              filters:
+                - StripPrefix=0
+
+            - id: route-service-doc
+              uri: lb://mototrip-route-service
+              predicates:
+                - Path=/v3/api-docs/route-service/**
+              filters:
+                - StripPrefix=0
+
+            - id: trip-service-doc
+              uri: lb://mototrip-trip-service
+              predicates:
+                - Path=/v3/api-docs/trip-service/**
+              filters:
+                - StripPrefix=0
+
+            - id: social-service-doc
+              uri: lb://mototrip-social-service
+              predicates:
+                - Path=/v3/api-docs/social-service/**
+              filters:
+                - StripPrefix=0
+
+            - id: map-safety-service-doc
+              uri: lb://mototrip-map-safety-service
+              predicates:
+                - Path=/v3/api-docs/map-safety-service/**
+              filters:
+                - StripPrefix=0
+
+            - id: team-service-doc
+              uri: lb://mototrip-team-service
+              predicates:
+                - Path=/v3/api-docs/team-service/**
+              filters:
+                - StripPrefix=0
+
+            - id: weather-service-doc
+              uri: lb://mototrip-weather-service
+              predicates:
+                - Path=/v3/api-docs/weather-service/**
+              filters:
+                - StripPrefix=0
+
+            # 文档路由
+            - id: knife4j-doc
+              uri: lb://mototrip-auth-server
+              predicates:
+                - Path=/doc.html
+              filters:
+                - StripPrefix=0
+
+            - id: swagger-ui
+              uri: lb://mototrip-auth-server
+              predicates:
+                - Path=/swagger-ui.html
+              filters:
+                - StripPrefix=0
+
+            - id: webjars
+              uri: lb://mototrip-auth-server
+              predicates:
+                - Path=/webjars/**
+              filters:
+                - StripPrefix=0
+
+            - id: swagger-resources
+              uri: lb://mototrip-auth-server
+              predicates:
+                - Path=/swagger-resources/**
+              filters:
+                - StripPrefix=0
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+      scg:
+        fallback:
+          mode: response
+          response-status: 429
+          response-body: '{"code":429,"message":"请求过于频繁，请稍后再试"}'
+
+jwt:
+  secret: ${JWT_SECRET:mototrip-jwt-secret-key-must-be-at-least-256-bits-for-hs256-algorithm}
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  gateway:
+    enabled: true
