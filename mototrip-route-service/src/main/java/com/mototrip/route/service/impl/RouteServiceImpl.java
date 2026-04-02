@@ -46,8 +46,12 @@ public class RouteServiceImpl implements RouteService {
             throw new NotFoundException("路线不存在");
         }
         // 增加浏览量
-        route.setViews(route.getViews() + 1);
-        routeMapper.updateById(route);
+        Route updateRoute = new Route();
+        updateRoute.setId(id);
+        updateRoute.setViews(route.getViews() + 1);
+        routeMapper.updateById(updateRoute);
+        // 更新返回对象的浏览量
+        route.setViews(updateRoute.getViews());
         return route;
     }
 
@@ -129,7 +133,11 @@ public class RouteServiceImpl implements RouteService {
         userLikeMapper.insert(like);
 
         // 更新点赞数
-        route.setLikes(route.getLikes() + 1);
-        routeMapper.updateById(route);
+        Route updateRoute = new Route();
+        updateRoute.setId(id);
+        updateRoute.setLikes(route.getLikes() + 1);
+        routeMapper.updateById(updateRoute);
+        // 更新返回对象的点赞数
+        route.setLikes(updateRoute.getLikes());
     }
 }
