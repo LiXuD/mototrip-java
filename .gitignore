@@ -40,3 +40,4 @@ logs/
 # Package
 *.zip
 *.tar.gz
+!/start-all-services.sh

@@ -10,7 +10,6 @@ public class User {
     @TableId(type = IdType.AUTO)
     private Long id;
     private String username;
-    @TableField(select = false)
     private String password;
     private String nickname;
     private String avatar;

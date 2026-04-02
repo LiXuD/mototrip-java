@@ -8,8 +8,16 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.mototrip")
-@ComponentScan(basePackages = {"com.mototrip"})
+@EnableFeignClients(basePackages = "com.mototrip.common.client")
+@ComponentScan(basePackages = {
+    "com.mototrip.team",
+    "com.mototrip.common.config",
+    "com.mototrip.common.response",
+    "com.mototrip.common.util",
+    "com.mototrip.common.context",
+    "com.mototrip.common.enums",
+    "com.mototrip.common.constant"
+})
 public class TeamServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(TeamServiceApplication.class, args);

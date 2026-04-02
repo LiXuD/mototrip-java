@@ -17,12 +17,7 @@ spring:
         import-check:
           enabled: false
     gateway:
-      server:
-        webflux:
-          discovery:
-            locator:
-              enabled: false
-          routes:
+      routes:
             - id: auth-service
               uri: lb://mototrip-auth-server
               predicates:

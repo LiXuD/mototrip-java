@@ -7,7 +7,15 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"com.mototrip"})
+@ComponentScan(basePackages = {
+    "com.mototrip.auth",
+    "com.mototrip.common.config",
+    "com.mototrip.common.response",
+    "com.mototrip.common.util",
+    "com.mototrip.common.context",
+    "com.mototrip.common.enums",
+    "com.mototrip.common.constant"
+})
 public class AuthServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(AuthServerApplication.class, args);
