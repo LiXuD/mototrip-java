@@ -235,7 +235,3 @@ Gateway JWT 验证 → 设置 X-User-Id/X-Username 头
 ## 许可证
 
 Apache License 2.0
-
-## 致谢
-
-- 原始 NestJS 项目：[LiXuD/mototrip-api](https://github.com/LiXuD/mototrip-api)
