@@ -1,6 +1,8 @@
 package com.mototrip.gateway.config;
 
 import org.springdoc.core.models.GroupedOpenApi;
+import org.springdoc.core.properties.SpringDocConfigProperties;
+import org.springdoc.core.properties.SpringDocConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +11,16 @@ import java.util.List;
 
 @Configuration
 public class Knife4jConfig {
+
+    @Bean
+    public SpringDocConfiguration springDocConfiguration() {
+        return new SpringDocConfiguration();
+    }
+
+    @Bean
+    public SpringDocConfigProperties springDocConfigProperties() {
+        return new SpringDocConfigProperties();
+    }
 
     @Bean
     public List<GroupedOpenApi> groupedOpenApis() {
