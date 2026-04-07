@@ -18,14 +18,71 @@ spring:
           enabled: false
     gateway:
       routes:
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: auth-service-docs
+        # 认证服务通用路由（用于 Knife4j 文档）
+        - id: auth-service-general
           uri: lb://mototrip-auth-server
           predicates:
-            - Path=/api/auth/v3/api-docs, /api/auth/v3/api-docs/v3/api-docs
+            - Path=/mototrip-auth-server/**
           filters:
-            - RewritePath=/api/auth/v3/api-docs(/v3/api-docs)?, /v3/api-docs
-        # 业务路由
+            - StripPrefix=1
+
+        # 用户中心通用路由（用于 Knife4j 文档）
+        - id: user-center-general
+          uri: lb://mototrip-user-center
+          predicates:
+            - Path=/mototrip-user-center/**
+          filters:
+            - StripPrefix=1
+
+        # 路线服务通用路由（用于 Knife4j 文档）
+        - id: route-service-general
+          uri: lb://mototrip-route-service
+          predicates:
+            - Path=/mototrip-route-service/**
+          filters:
+            - StripPrefix=1
+
+        # 旅行服务通用路由（用于 Knife4j 文档）
+        - id: trip-service-general
+          uri: lb://mototrip-trip-service
+          predicates:
+            - Path=/mototrip-trip-service/**
+          filters:
+            - StripPrefix=1
+
+        # 社交服务通用路由（用于 Knife4j 文档）
+        - id: social-service-general
+          uri: lb://mototrip-social-service
+          predicates:
+            - Path=/mototrip-social-service/**
+          filters:
+            - StripPrefix=1
+
+        # 地图安全服务通用路由（用于 Knife4j 文档）
+        - id: map-safety-service-general
+          uri: lb://mototrip-map-safety-service
+          predicates:
+            - Path=/mototrip-map-safety-service/**
+          filters:
+            - StripPrefix=1
+
+        # 团队服务通用路由（用于 Knife4j 文档）
+        - id: team-service-general
+          uri: lb://mototrip-team-service
+          predicates:
+            - Path=/mototrip-team-service/**
+          filters:
+            - StripPrefix=1
+
+        # 天气服务通用路由（用于 Knife4j 文档）
+        - id: weather-service-general
+          uri: lb://mototrip-weather-service
+          predicates:
+            - Path=/mototrip-weather-service/**
+          filters:
+            - StripPrefix=1
+
+        # 认证服务路由
         - id: auth-service
           uri: lb://mototrip-auth-server
           predicates:
@@ -33,13 +90,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: user-center-docs
-          uri: lb://mototrip-user-center
-          predicates:
-            - Path=/api/users/v3/api-docs, /api/users/v3/api-docs/v3/api-docs
-          filters:
-            - RewritePath=/api/users/v3/api-docs(/v3/api-docs)?, /v3/api-docs
         # 用户中心路由
         - id: user-center
           uri: lb://mototrip-user-center
@@ -48,13 +98,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: route-service-docs
-          uri: lb://mototrip-route-service
-          predicates:
-            - Path=/api/routes/v3/api-docs, /api/routes/v3/api-docs/v3/api-docs
-          filters:
-            - RewritePath=/api/routes/v3/api-docs(/v3/api-docs)?, /v3/api-docs
         # 路线服务路由
         - id: route-service
           uri: lb://mototrip-route-service
@@ -63,13 +106,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: trip-service-docs
-          uri: lb://mototrip-trip-service
-          predicates:
-            - Path=/api/trips/v3/api-docs, /api/trips/v3/api-docs/v3/api-docs
-          filters:
-            - RewritePath=/api/trips/v3/api-docs(/v3/api-docs)?, /v3/api-docs
         # 旅行服务路由
         - id: trip-service
           uri: lb://mototrip-trip-service
@@ -78,13 +114,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: social-service-docs
-          uri: lb://mototrip-social-service
-          predicates:
-            - Path=/api/posts/v3/api-docs, /api/posts/v3/api-docs/v3/api-docs
-          filters:
-            - RewritePath=/api/posts/v3/api-docs(/v3/api-docs)?, /v3/api-docs
         # 社交服务路由
         - id: social-service
           uri: lb://mototrip-social-service
@@ -93,13 +122,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: map-safety-service-docs
-          uri: lb://mototrip-map-safety-service
-          predicates:
-            - Path=/api/maps/v3/api-docs, /api/maps/v3/api-docs/v3/api-docs
-          filters:
-            - RewritePath=/api/maps/v3/api-docs(/v3/api-docs)?, /v3/api-docs
         # 地图安全服务路由
         - id: map-safety-service
           uri: lb://mototrip-map-safety-service
@@ -108,13 +130,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: team-service-docs
-          uri: lb://mototrip-team-service
-          predicates:
-            - Path=/api/teams/v3/api-docs, /api/teams/v3/api-docs/v3/api-docs
-          filters:
-            - RewritePath=/api/teams/v3/api-docs(/v3/api-docs)?, /v3/api-docs
         # 团队服务路由
         - id: team-service
           uri: lb://mototrip-team-service
@@ -123,13 +138,6 @@ spring:
           filters:
             - StripPrefix=1
 
-        # 文档路由 - 直接转发到微服务的 /v3/api-docs
-        - id: weather-service-docs
-          uri: lb://mototrip-weather-service
-          predicates:
-            - Path=/api/weather/v3/api-docs, /api/weather/v3/api-docs/v3/api-docs
-          filters:
-            - RewritePath=/api/weather/v3/api-docs(/v3/api-docs)?, /v3/api-docs
         # 天气服务路由
         - id: weather-service
           uri: lb://mototrip-weather-service
@@ -137,8 +145,6 @@ spring:
             - Path=/api/weather/**
           filters:
             - StripPrefix=1
-
-        # 文档路由 - 由 Knife4j Gateway 聚合组件自动处理
     sentinel:
       transport:
         dashboard: localhost:8858
@@ -163,7 +169,5 @@ knife4j:
       version: openapi3
       excluded-services:
         - mototrip-gateway
-      oas3:
-        url: ""
 
 
