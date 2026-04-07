@@ -61,6 +61,14 @@ public class JwtAuthGlobalFilter implements GlobalFilter, Ordered {
         String path = request.getPath().value();
         String method = request.getMethod().name();
 
+        // Knife4j/Swagger 文档路径放行（优先处理）
+        if (path.startsWith("/doc.html") || path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-resources") || path.startsWith("/webjars")
+                || (path.contains("/v3/api-docs") && path.startsWith("/api/"))
+                || path.startsWith("/mototrip-")) {
+            return chain.filter(exchange);
+        }
+
         // 白名单精确匹配
         if (WHITE_LIST.contains(path)) {
             return chain.filter(exchange);
@@ -73,13 +81,6 @@ public class JwtAuthGlobalFilter implements GlobalFilter, Ordered {
                     return chain.filter(exchange);
                 }
             }
-        }
-
-        // Knife4j/Swagger 文档路径放行
-        if (path.startsWith("/doc.html") || path.startsWith("/v3/api-docs")
-                || path.startsWith("/swagger-resources") || path.startsWith("/webjars")
-                || (path.contains("/v3/api-docs") && path.startsWith("/api/"))) {
-            return chain.filter(exchange);
         }
 
         // 提取 Authorization header
