@@ -17,149 +17,128 @@ spring:
         import-check:
           enabled: false
     gateway:
-      server:
-        webflux:
-          routes:
-                - id: auth-service
-                  uri: lb://mototrip-auth-server
-                  predicates:
-                    - Path=/api/auth/**
-                  filters:
-                    - StripPrefix=0
+      routes:
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: auth-service-docs
+          uri: lb://mototrip-auth-server
+          predicates:
+            - Path=/api/auth/v3/api-docs, /api/auth/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/auth/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 业务路由
+        - id: auth-service
+          uri: lb://mototrip-auth-server
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
 
-                - id: user-center
-                  uri: lb://mototrip-user-center
-                  predicates:
-                    - Path=/api/users/**,/api/user-mode/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: user-center-docs
+          uri: lb://mototrip-user-center
+          predicates:
+            - Path=/api/users/v3/api-docs, /api/users/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/users/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 用户中心路由
+        - id: user-center
+          uri: lb://mototrip-user-center
+          predicates:
+            - Path=/api/users/**,/api/user-mode/**
+          filters:
+            - StripPrefix=1
 
-                - id: route-service
-                  uri: lb://mototrip-route-service
-                  predicates:
-                    - Path=/api/routes/**,/api/waypoints/**,/api/reviews/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: route-service-docs
+          uri: lb://mototrip-route-service
+          predicates:
+            - Path=/api/routes/v3/api-docs, /api/routes/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/routes/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 路线服务路由
+        - id: route-service
+          uri: lb://mototrip-route-service
+          predicates:
+            - Path=/api/routes/**,/api/waypoints/**,/api/reviews/**
+          filters:
+            - StripPrefix=1
 
-                - id: trip-service
-                  uri: lb://mototrip-trip-service
-                  predicates:
-                    - Path=/api/trips/**,/api/diaries/**,/api/preparations/**,/api/shares/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: trip-service-docs
+          uri: lb://mototrip-trip-service
+          predicates:
+            - Path=/api/trips/v3/api-docs, /api/trips/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/trips/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 旅行服务路由
+        - id: trip-service
+          uri: lb://mototrip-trip-service
+          predicates:
+            - Path=/api/trips/**,/api/diaries/**,/api/preparations/**,/api/shares/**
+          filters:
+            - StripPrefix=1
 
-                - id: social-service
-                  uri: lb://mototrip-social-service
-                  predicates:
-                    - Path=/api/posts/**,/api/footprints/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: social-service-docs
+          uri: lb://mototrip-social-service
+          predicates:
+            - Path=/api/posts/v3/api-docs, /api/posts/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/posts/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 社交服务路由
+        - id: social-service
+          uri: lb://mototrip-social-service
+          predicates:
+            - Path=/api/posts/**,/api/footprints/**
+          filters:
+            - StripPrefix=1
 
-                - id: map-safety-service
-                  uri: lb://mototrip-map-safety-service
-                  predicates:
-                    - Path=/api/maps/**,/api/danger-zones/**,/api/no-parking-zones/**,/api/warnings/**,/api/locations/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: map-safety-service-docs
+          uri: lb://mototrip-map-safety-service
+          predicates:
+            - Path=/api/maps/v3/api-docs, /api/maps/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/maps/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 地图安全服务路由
+        - id: map-safety-service
+          uri: lb://mototrip-map-safety-service
+          predicates:
+            - Path=/api/maps/**,/api/danger-zones/**,/api/no-parking-zones/**,/api/warnings/**,/api/locations/**
+          filters:
+            - StripPrefix=1
 
-                - id: team-service
-                  uri: lb://mototrip-team-service
-                  predicates:
-                    - Path=/api/teams/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: team-service-docs
+          uri: lb://mototrip-team-service
+          predicates:
+            - Path=/api/teams/v3/api-docs, /api/teams/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/teams/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 团队服务路由
+        - id: team-service
+          uri: lb://mototrip-team-service
+          predicates:
+            - Path=/api/teams/**
+          filters:
+            - StripPrefix=1
 
-                - id: weather-service
-                  uri: lb://mototrip-weather-service
-                  predicates:
-                    - Path=/api/weather/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 直接转发到微服务的 /v3/api-docs
+        - id: weather-service-docs
+          uri: lb://mototrip-weather-service
+          predicates:
+            - Path=/api/weather/v3/api-docs, /api/weather/v3/api-docs/v3/api-docs
+          filters:
+            - RewritePath=/api/weather/v3/api-docs(/v3/api-docs)?, /v3/api-docs
+        # 天气服务路由
+        - id: weather-service
+          uri: lb://mototrip-weather-service
+          predicates:
+            - Path=/api/weather/**
+          filters:
+            - StripPrefix=1
 
-                - id: auth-doc
-                  uri: lb://mototrip-auth-server
-                  predicates:
-                    - Path=/v3/api-docs/auth-service/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: user-center-doc
-                  uri: lb://mototrip-user-center
-                  predicates:
-                    - Path=/v3/api-docs/user-center/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: route-service-doc
-                  uri: lb://mototrip-route-service
-                  predicates:
-                    - Path=/v3/api-docs/route-service/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: trip-service-doc
-                  uri: lb://mototrip-trip-service
-                  predicates:
-                    - Path=/v3/api-docs/trip-service/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: social-service-doc
-                  uri: lb://mototrip-social-service
-                  predicates:
-                    - Path=/v3/api-docs/social-service/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: map-safety-service-doc
-                  uri: lb://mototrip-map-safety-service
-                  predicates:
-                    - Path=/v3/api-docs/map-safety-service/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: team-service-doc
-                  uri: lb://mototrip-team-service
-                  predicates:
-                    - Path=/v3/api-docs/team-service/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: weather-service-doc
-                  uri: lb://mototrip-weather-service
-                  predicates:
-                    - Path=/v3/api-docs/weather-service/**
-                  filters:
-                    - StripPrefix=0
-
-                # 文档路由
-                - id: knife4j-doc
-                  uri: lb://mototrip-auth-server
-                  predicates:
-                    - Path=/doc.html
-                  filters:
-                    - StripPrefix=0
-
-                - id: swagger-ui
-                  uri: lb://mototrip-auth-server
-                  predicates:
-                    - Path=/swagger-ui.html
-                  filters:
-                    - StripPrefix=0
-
-                - id: webjars
-                  uri: lb://mototrip-auth-server
-                  predicates:
-                    - Path=/webjars/**
-                  filters:
-                    - StripPrefix=0
-
-                - id: swagger-resources
-                  uri: lb://mototrip-auth-server
-                  predicates:
-                    - Path=/swagger-resources/**
-                  filters:
-                    - StripPrefix=0
+        # 文档路由 - 由 Knife4j Gateway 聚合组件自动处理
     sentinel:
       transport:
         dashboard: localhost:8858
@@ -173,15 +152,18 @@ jwt:
   secret: ${JWT_SECRET:mototrip-jwt-secret-key-must-be-at-least-256-bits-for-hs256-algorithm}
 
 knife4j:
-  enable: true
+  enable: ${KNIFE4J_ENABLE:true}
   setting:
     language: zh_cn
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-  api-docs:
-    path: /v3/api-docs
-    enabled: true
   gateway:
-    enabled: true
+    enabled: ${KNIFE4J_GATEWAY_ENABLE:true}
+    strategy: discover
+    discover:
+      enabled: true
+      version: openapi3
+      excluded-services:
+        - mototrip-gateway
+      oas3:
+        url: ""
+
+
