@@ -77,7 +77,8 @@ public class JwtAuthGlobalFilter implements GlobalFilter, Ordered {
 
         // Knife4j/Swagger 文档路径放行
         if (path.startsWith("/doc.html") || path.startsWith("/v3/api-docs")
-                || path.startsWith("/swagger-resources") || path.startsWith("/webjars")) {
+                || path.startsWith("/swagger-resources") || path.startsWith("/webjars")
+                || (path.contains("/v3/api-docs") && path.startsWith("/api/"))) {
             return chain.filter(exchange);
         }
 
