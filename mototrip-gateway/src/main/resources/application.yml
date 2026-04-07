@@ -176,22 +176,11 @@ knife4j:
   enable: true
   setting:
     language: zh_cn
-  openapi:
-    title: MotoTrip API 文档
-    description: 摩托车骑行管理平台 API 文档
-    version: 1.0.0
-    group: 
-      enabled: true
 
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
   api-docs:
     path: /v3/api-docs
-    enabled: true
   gateway:
     enabled: true
-  group-configs:
-    - group: "all"
-      paths-to-match: "/api/**"
-      packages-to-scan: "com.mototrip.gateway.config"
