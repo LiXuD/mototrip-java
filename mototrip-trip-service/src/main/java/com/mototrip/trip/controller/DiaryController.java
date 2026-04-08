@@ -13,9 +13,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "日记管理", description = "旅行日记 CRUD")
+@Tag(name = "日记管理", description = "行程日记创建、查询、更新、删除")
 @RestController
-@RequestMapping("/api/diaries")
+@RequestMapping("/diaries")
 @RequiredArgsConstructor
 public class DiaryController {
     private final DiaryService diaryService;

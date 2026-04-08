@@ -18,7 +18,7 @@ import java.util.List;
 
 @Tag(name = "车队管理", description = "骑行车队 CRUD 和成员管理")
 @RestController
-@RequestMapping("/api/teams")
+@RequestMapping("/teams")
 @RequiredArgsConstructor
 public class TeamController {
     private final TeamService teamService;

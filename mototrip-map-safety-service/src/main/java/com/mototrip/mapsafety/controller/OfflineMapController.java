@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Tag(name = "离线地图", description = "离线地图管理")
 @RestController
-@RequestMapping("/api/maps")
+@RequestMapping("/maps")
 @RequiredArgsConstructor
 public class OfflineMapController {
     private final OfflineMapService offlineMapService;

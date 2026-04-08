@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "用户模式", description = "用户骑行模式管理")
 @RestController
-@RequestMapping("/api/user-mode")
+@RequestMapping("/user-mode")
 @RequiredArgsConstructor
 public class UserModeController {
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "准备清单", description = "出行准备物品管理")
 @RestController
-@RequestMapping("/api/preparations")
+@RequestMapping("/preparations")
 @RequiredArgsConstructor
 public class PreparationController {
     private final PreparationService preparationService;

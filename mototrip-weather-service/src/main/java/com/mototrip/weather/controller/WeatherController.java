@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "天气服务", description = "天气查询 API 代理")
+@Tag(name = "天气服务", description = "天气信息查询")
 @RestController
-@RequestMapping("/api/weather")
+@RequestMapping("/weather")
 @RequiredArgsConstructor
 public class WeatherController {
 

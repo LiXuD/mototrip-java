@@ -16,7 +16,7 @@ import java.util.List;
 
 @Tag(name = "禁停区域", description = "禁停区域管理")
 @RestController
-@RequestMapping("/api/no-parking-zones")
+@RequestMapping("/no-parking-zones")
 @RequiredArgsConstructor
 public class NoParkingZoneController {
     private final NoParkingZoneService noParkingZoneService;

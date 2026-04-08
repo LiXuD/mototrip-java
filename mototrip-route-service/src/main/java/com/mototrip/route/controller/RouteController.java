@@ -13,9 +13,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "路线管理", description = "骑行路线 CRUD")
+@Tag(name = "路线管理", description = "路线创建、查询、更新、删除")
 @RestController
-@RequestMapping("/api/routes")
+@RequestMapping("/routes")
 @RequiredArgsConstructor
 public class RouteController {
 

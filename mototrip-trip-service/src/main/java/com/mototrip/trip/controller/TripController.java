@@ -13,9 +13,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "行程管理", description = "骑行行程 CRUD")
+@Tag(name = "行程管理", description = "行程创建、查询、更新、删除")
 @RestController
-@RequestMapping("/api/trips")
+@RequestMapping("/trips")
 @RequiredArgsConstructor
 public class TripController {
     private final TripService tripService;
