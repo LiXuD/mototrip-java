@@ -13,9 +13,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "途经点管理", description = "路线途经点 CRUD")
+@Tag(name = "途经点管理", description = "途经点创建、查询、更新、删除")
 @RestController
-@RequestMapping("/api/waypoints")
+@RequestMapping("/waypoints")
 @RequiredArgsConstructor
 public class WaypointController {
 

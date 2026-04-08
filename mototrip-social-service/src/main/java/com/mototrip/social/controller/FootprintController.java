@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Tag(name = "足迹管理", description = "骑行足迹和成就")
+@Tag(name = "足迹管理", description = "足迹创建、查询、统计")
 @RestController
-@RequestMapping("/api/footprints")
+@RequestMapping("/footprints")
 @RequiredArgsConstructor
 public class FootprintController {
     private final FootprintService footprintService;

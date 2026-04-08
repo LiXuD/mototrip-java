@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "位置共享", description = "实时位置共享")
 @RestController
-@RequestMapping("/api/locations")
+@RequestMapping("/locations")
 @RequiredArgsConstructor
 public class LocationController {
     private final LocationService locationService;

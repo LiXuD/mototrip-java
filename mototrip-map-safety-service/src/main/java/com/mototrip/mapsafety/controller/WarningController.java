@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "警告聚合", description = "骑行安全警告聚合")
 @RestController
-@RequestMapping("/api/warnings")
+@RequestMapping("/warnings")
 @RequiredArgsConstructor
 public class WarningController {
     private final WarningService warningService;

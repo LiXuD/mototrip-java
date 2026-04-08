@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Tag(name = "危险区域", description = "危险区域管理")
 @RestController
-@RequestMapping("/api/danger-zones")
+@RequestMapping("/danger-zones")
 @RequiredArgsConstructor
 public class DangerZoneController {
     private final DangerZoneService dangerZoneService;

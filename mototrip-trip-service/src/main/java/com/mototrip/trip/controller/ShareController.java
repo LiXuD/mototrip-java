@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "行程分享", description = "行程分享管理")
 @RestController
-@RequestMapping("/api/shares")
+@RequestMapping("/shares")
 @RequiredArgsConstructor
 public class ShareController {
     private final ShareService shareService;
